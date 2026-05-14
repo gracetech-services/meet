@@ -10,7 +10,7 @@ function createToken(payload: Record<string, unknown>, header: Record<string, un
 }
 
 describe('parseJoinToken', () => {
-  it('reads room and participant name from a LiveKit video grant token', () => {
+  it('reads room and participant name from a video grant token', () => {
     const token = createToken({ video: { room: 'team-sync' }, name: 'Alice' });
 
     expect(parseJoinToken(token)).toEqual({

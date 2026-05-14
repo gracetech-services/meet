@@ -129,7 +129,7 @@ function printUsage(exitCode) {
   output.write(`Usage: pnpm participant-token -- <room> <user> [options]
 
 Options:
-  --server-url <url>    LiveKit WebSocket URL. Defaults to LIVEKIT_URL.
+  --server-url <url>    Video server WebSocket URL. Defaults to LIVEKIT_URL.
   --identity <identity> Participant identity. Defaults to <user>__<random>.
   --ttl <seconds>       Token lifetime in seconds. Defaults to ${DEFAULT_TTL_SECONDS}.
 `);
