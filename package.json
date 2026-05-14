@@ -9,6 +9,7 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "test": "vitest run",
+    "participant-token": "node scripts/create-participant-token.mjs",
     "format:check": "prettier --check \"**/*.{ts,tsx,md,json}\"",
     "format:write": "prettier --write \"**/*.{ts,tsx,md,json}\""
   },
@@ -19,7 +20,6 @@
     "@livekit/krisp-noise-filter": "0.4.3",
     "@livekit/track-processors": "^0.7.0",
     "livekit-client": "2.18.8",
-    "livekit-server-sdk": "2.15.2",
     "next": "15.5.16",
     "react": "18.3.1",
     "react-dom": "18.3.1",
