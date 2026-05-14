@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
   reactStrictMode: false,
   productionBrowserSourceMaps: true,
   images: {
-    formats: ['image/webp'],
+    unoptimized: true
   },
   webpack: (config, { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }) => {
     // Important: return the modified config
@@ -14,24 +15,7 @@ const nextConfig = {
     });
 
     return config;
-  },
-  headers: async () => {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'Cross-Origin-Opener-Policy',
-            value: 'same-origin',
-          },
-          {
-            key: 'Cross-Origin-Embedder-Policy',
-            value: 'credentialless',
-          },
-        ],
-      },
-    ];
-  },
+  }
 };
 
 module.exports = nextConfig;
