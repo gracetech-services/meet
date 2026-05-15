@@ -7,7 +7,7 @@ name: CI (self-hosted)
 
 on:
   push:
-    branches: [main]
+    branches: [gracetech]
   pull_request:
   workflow_dispatch:
 
