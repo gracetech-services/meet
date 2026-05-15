@@ -1,0 +1,49 @@
+# CI on a machine you register as a GitHub Actions self-hosted runner for this repo or org.
+# Setup: https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/adding-self-hosted-runners
+#
+# Runner must be able to run Node (setup-node installs a toolchain if missing) and have network
+# access for checkout and pnpm registry. Optional: install pnpm globally and omit pnpm/action-setup.
+name: CI (self-hosted)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# One job at a time per branch avoids saturating a single self-hosted machine.
+concurrency:
+  group: self-hosted-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: ESLint
+        run: pnpm lint
+
+      - name: Prettier
+        run: pnpm format:check
+
+      - name: Tests
+        run: pnpm test
+
+      - name: Production build
+        run: pnpm build
